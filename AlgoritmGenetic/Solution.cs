@@ -22,8 +22,8 @@ namespace AlgoritmGenetic
             float toR = 0;
             foreach(Edge edge in graph.edges)
             {
-                toR += ((edge.absdist - edge.pond * k)
-                    *(edge.absdist - edge.pond * k));
+                toR += ((edge.Absdist() - edge.pond * k)
+                    *(edge.Absdist() - edge.pond * k));
             }
             return toR;
         }

@@ -59,5 +59,32 @@ namespace AlgoritmGenetic
 
             return toR;
         }
+
+        public void Update(int et)
+        {
+            solutions.Clear();
+           
+            for (int i = 0; i < N; i++)
+            {
+                int idx1,idx2;
+
+                do
+                {
+                    idx1 = rnd.Next(K);
+                    idx2 = rnd.Next(K);
+                } while (idx1 == idx2);
+
+                Solution chl = Crossover(par[idx1], par[idx2]);
+                chl.Mutate(et);
+                solutions.Add(chl);
+            }
+        }
+
+        public void Do(int et)
+        {
+            Sort();
+            Selection();
+            Update(et);
+        }
     }
 }

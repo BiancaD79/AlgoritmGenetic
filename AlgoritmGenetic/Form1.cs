@@ -20,6 +20,9 @@ namespace AlgoritmGenetic
         MyGraphics grp;
         MyGraphics grp2;
         MyGraphics grp3;
+        Population pop;
+
+        int et;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -27,25 +30,16 @@ namespace AlgoritmGenetic
             grp = new MyGraphics(pictureBox1);
             grp2 = new MyGraphics(pictureBox2);
             grp3 = new MyGraphics(pictureBox3);
-            Population pop = new Population();
+            pop = new Population();
 
-            pop.Sort();
-            pop.Selection();
+            et = 1000;
 
-            pop.par[0].Draw(grp.grp);
-            pop.par[1].Draw(grp2.grp);
-
-            Solution test = pop.Crossover(pop.par[0], pop.par[1]);
-            test.Mutate(200);
-            test.Draw(grp3.grp);
 
             grp.Refresh();
             grp2.Refresh();
             grp3.Refresh();
 
-            textBox1.Text = pop.par[0].Fadec().ToString("0.000");
-            textBox2.Text = pop.par[1].Fadec().ToString("0.000");
-            textBox3.Text = test.Fadec().ToString("0.000");
+          
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -56,6 +50,26 @@ namespace AlgoritmGenetic
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            et--;
+            pop.Do(et/3 + 1);
+            grp.Clear();
+            pop.par[0].Draw(grp.grp);
+            grp.Refresh();
+            textBox1.Text = pop.par[0].Fadec().ToString();
+            textBox2.Text = et.ToString();
+            if(et == 20)
+            {
+                timer1.Enabled = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = !timer1.Enabled;
         }
     }
 }

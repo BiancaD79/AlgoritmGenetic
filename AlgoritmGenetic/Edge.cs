@@ -12,7 +12,10 @@ namespace AlgoritmGenetic
         Vertex start, end;
         public float pond;
         public string info;
-        public float absdist;
+        public float Absdist() 
+        {
+            return (float)Math.Sqrt((start.loc.X - end.loc.X)*(start.loc.X - end.loc.X) + (start.loc.Y - end.loc.Y) *(start.loc.Y - end.loc.Y));
+        }
         public Edge(string data, List<Vertex> vertices)
         {
             info = data;
@@ -20,8 +23,9 @@ namespace AlgoritmGenetic
             start = vertices[int.Parse(datasplit[0])];
             end = vertices[int.Parse(datasplit[1])];
             pond = float.Parse(datasplit[2]);
-            absdist = (float)Math.Sqrt((start.loc.X - end.loc.X)*(start.loc.X - end.loc.X) + (start.loc.Y - end.loc.Y) *(start.loc.Y - end.loc.Y));
         }
+
+
 
         public void Draw(Graphics handler)
         {
